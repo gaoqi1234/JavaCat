@@ -30,13 +30,18 @@ public class JavaCat extends Application extends WindowController{
 
   public void start(Stage primaryStage) {
     Pane parentPane = new Pane();   // contains background
-    Pane childPane = new BorderPane();
-    childPane.setTop(get)
-  
+    Pane childPane = new GridPane();
+    childPane.setHgap(20);
+    childPane.setVgap(20);
+    childPane.setPadding(new Insets(40, 20, 40, 20));
+    
     ImageView background = new ImageView("image/background");
   
     Image catNormal = new Image(“image/catNormal”);
     ImageView imageViewCatNormal = new ImageView(catNormal);
+    
+    Text txMonthAndDate = new Text(calculateMonth + calculateDate);
+    Text txTime = new Text(calculateTime);
     
     parentPane.getChildren().addAll(background, childPane);
 
@@ -121,13 +126,13 @@ public class JavaCat extends Application extends WindowController{
   public static String calculateMonth();
     month = (count / THREE) / TWENTY_EIGHT + 1;
     if (month == 1) {
-      return “January”;
+      return “January ”;
     }
     if (month == TWO) {
-      return “February”;
+      return “February ”;
     }
     else {
-      return “March”;
+      return “March ”;
     }
   }
 
