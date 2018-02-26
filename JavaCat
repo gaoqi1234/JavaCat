@@ -1,9 +1,16 @@
-import objectdraw.*;
-import Java.awt.*;
 import java.util.*;
-import javafx.*;
+import javafx.application.Application;
+import javafx.geometry.*;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.layout.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.shape.*;
+import javafx.scene.text.*;
+import javafx.scene.paint.*;
 
-public class JavaCat extends Application extends WindowController{
+public class JavaCat extends Application {
 
   private static int foodLevel = 75;
   private static int intimacy = 25;
@@ -28,25 +35,27 @@ public class JavaCat extends Application extends WindowController{
   private static final int SEVENTY_FIVE = 75;
   private static final int HUNDRED = 100;
 
+  private Image cat = new Image("image/catNormal");
+  private Text txMonthAndDate = new Text(calculateMonth() + calculateDate());
+  private Text txTime = new Text(calculateTime());
+  private Ellipse feed;
+  private Ellipse pat;
+  private Ellipse rebuke;
+
   public void start(Stage primaryStage) {
-    Pane parentPane = new Pane();   // contains background
-    Pane childPane = new GridPane();
-    childPane.setHgap(20);
-    childPane.setVgap(20);
-    childPane.setPadding(new Insets(40, 20, 40, 20));
+    Pane pane = new Pane();
+    pane.setPadding(new Insets(10, 10, 10, 10));
     
     ImageView background = new ImageView("image/background");
+    background.setFitHeight(1024);
+    background.setFitWidth(800);
   
-    Image catNormal = new Image(“image/catNormal”);
-    ImageView imageViewCatNormal = new ImageView(catNormal);
+    ImageView imageCat = new ImageView(cat);
     
-    Text txMonthAndDate = new Text(calculateMonth + calculateDate);
-    Text txTime = new Text(calculateTime);
-    
-    parentPane.getChildren().addAll(background, childPane);
+    pane.getChildren().addAll(background);
 
     Scene scene = new Scene(pane, 800, 1024);
-    primaryStage.setTitle(“Java Cat”);
+    primaryStage.setTitle("Java Cat");
     primaryStage.setScene(scene);
     primaryStage.show();
     primaryStage.setResizable(false);
@@ -63,21 +72,24 @@ public class JavaCat extends Application extends WindowController{
     }
   }
   
-  public void onMouseClick(Location point) {
-    if (feed.contains(point)) {
-      increment(foodLevel);
-      decrement(patCount);
-      count++;
-    }
-    if (pat.contains(point)) {
-      pat();
-    }
-    if (rebuke.contains(point)) {
-      rebuke();
+  // inner class
+  public class JavaCatInteractions extends WindowController {
+    public void onMouseClick(Location point) {
+      if (feed.contains(point)) {
+        increment(foodLevel);
+        decrement(patCount);
+        count++;
+      }
+      if (pat.contains(point)) {
+        JavaCat.pat();
+      }
+      if (rebuke.contains(point)) {
+        JavaCat.rebuke();
+      }
     }
   }
 
-  public static void pat();
+  public static void pat() {
     if (patCount > FIVE) {
       decrement(intimacy);
     }
@@ -92,7 +104,7 @@ public class JavaCat extends Application extends WindowController{
     count++;
   }
 
-  public static void rebuke();
+  public static void rebuke() {
     if (rebellion > SEVENTY_FIVE) {
       decrement(intimacy);
       decrement(intimacy);
@@ -105,38 +117,38 @@ public class JavaCat extends Application extends WindowController{
     count++;
   }
 
-  public static String calculateTime();
+  public static String calculateTime() {
     time = count % THREE;
     if (time == 0) {
-      return “Morning”;
+      return "Morning";
     }
     if (time == 1) {
-      return “Afternoon”;
+      return "Afternoon";
     }
     else {
-      return “Evening”;
+      return "Evening";
     }
   }
 
-  public static String calculateDate();
+  public static String calculateDate() {
     date = (count / THREE) % TWENTY_EIGHT + 1;
-    return  date + “”;
+    return  date + "";
   }
 
-  public static String calculateMonth();
+  public static String calculateMonth() {
     month = (count / THREE) / TWENTY_EIGHT + 1;
     if (month == 1) {
-      return “January ”;
+      return "January ";
     }
     if (month == TWO) {
-      return “February ”;
+      return "February ";
     }
     else {
-      return “March ”;
+      return "March ";
     }
   }
 
-  public static int foodLevelPlus();
+  public static int foodLevelPlus() {
     if (foodLevel < FIFTY) {
       foodLevel += FIFTY;
       return foodLevel;
@@ -146,7 +158,7 @@ public class JavaCat extends Application extends WindowController{
     }
   }
 
-  public static int increment(int variavle);
+  public static int increment(int variable) {
     if (variable < HUNDRED) {
       variable++;
       return variable;
@@ -156,7 +168,7 @@ public class JavaCat extends Application extends WindowController{
     }
   }
 
-  public static int decrement(int variable);
+  public static int decrement(int variable) {
     if (variable > 0) {
       variable--;
       return variable;
@@ -165,4 +177,4 @@ public class JavaCat extends Application extends WindowController{
       return variable;
     }
   }
-}
+} 
