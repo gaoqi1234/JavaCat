@@ -29,11 +29,15 @@ public class JavaCat extends Application extends WindowController{
   private static final int HUNDRED = 100;
 
   public void start(Stage primaryStage) {
-    Pane pane = new GridPane();
+    Pane parentPane = new Pane();   // contains background
+    Pane childPane = new gridPane();
   
-    Image catNormal = newImage(“image/catNormal”);
+    ImageView background = new ImageView("image/background");
+  
+    Image catNormal = new Image(“image/catNormal”);
     ImageView imageViewCatNormal = new ImageView(catNormal);
-    pane.getChildren().addAll(feed, pat, rebuke, date??);
+    
+    parentPane.getChildren().addAll(background, childPane);
 
     Scene scene = new Scene(pane, 800, 1024);
     primaryStage.setTitle(“Java Cat”);
