@@ -41,6 +41,7 @@ public class JavaCat extends Application {
   private Ellipse feed;
   private Ellipse pat;
   private Ellipse rebuke;
+  private Ellipse skip;
 
   public void start(Stage primaryStage) {
     Pane pane = new Pane();
@@ -86,6 +87,11 @@ public class JavaCat extends Application {
       if (rebuke.contains(point)) {
         JavaCat.rebuke();
       }
+      if (skip.contains(point)) {
+        foodLevel -= FIVE;
+        decrement(patCount);
+        count++;
+      }
     }
   }
 
@@ -114,6 +120,7 @@ public class JavaCat extends Application {
     }
     decrement(rebellion);
     foodLevel -= FIVE;
+    decrement(patCount);
     count++;
   }
 
