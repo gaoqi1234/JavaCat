@@ -30,7 +30,8 @@ public class JavaCat extends Application extends WindowController{
 
   public void start(Stage primaryStage) {
     Pane parentPane = new Pane();   // contains background
-    Pane childPane = new gridPane();
+    Pane childPane = new BorderPane();
+    childPane.setTop(get)
   
     ImageView background = new ImageView("image/background");
   
