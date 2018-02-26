@@ -33,7 +33,7 @@ public class JavaCat extends Application extends WindowController{
   
   public static void main(String[] args) {
     launch(args);
-
+    
     if (foodLevel == 0) {
       System.exit(1);
     }
@@ -44,8 +44,8 @@ public class JavaCat extends Application extends WindowController{
   
   public void onMouseClick(Location point) {
     if (feed.contains(point)) {
-      foodLevelPlus();
-      patCountMinus();
+      increment(foodLevel);
+      decrement(patCount);
       count++;
     }
     if (pat.contains(point)) {
@@ -58,121 +58,90 @@ public class JavaCat extends Application extends WindowController{
 
   public static void pat();
     if (patCount > 5) {
-      intimacyMinus();
+      decrement(intimacy);
     }
-   if (patCount > 3) {
-     patCount++;
-   }
-     else {
-            patCount++;
-            intimacyPlus();
-        }
-        foodLevel -= 5;
-        count++;
-}
-
-    public static void rebuke();
-        if (rebellion > 75) {
-            intimacyMinus();
-            intimacyMinus();
-        }
-   else {
-            intimacyMinus();
-        }
-        rebellionMinus();
-        foodLevel -= 5;
-        count++;
+    if (patCount > 3) {
+      patCount++;
     }
+    else {
+      patCount++;
+      increment(intimacy);
+    }
+    foodLevel -= 5;
+    count++;
+  }
 
-    public static String calculateTime();
-        time = count % 3;
-        if (time == 0) {
-            return “Morning”;
-        }
-        if (time == 1) {
-            return “Afternoon”;
-        }
-        else {
-            return “Evening”;
-        }
-}
+  public static void rebuke();
+    if (rebellion > 75) {
+      decrement(intimacy);
+      decrement(intimacy);
+    }
+    else {
+      decrement(intimacy);
+    }
+    decrement(rebellion);
+    foodLevel -= 5;
+    count++;
+  }
 
-    public static String calculateDate();
-        date = (count / 3) % 28 + 1;
-        return  date + “”;
-}
+  public static String calculateTime();
+    time = count % 3;
+    if (time == 0) {
+      return “Morning”;
+    }
+    if (time == 1) {
+      return “Afternoon”;
+    }
+    else {
+      return “Evening”;
+    }
+  }
 
-    public static String calculateMonth();
-        month = (count / 3) / 28 + 1;
-        if (month == 1) {
-            return “January”;
-        }
-        if (month == 2) {
-            return “February”;
-        }
-        else {
-            return “March”;
-        }
-}
+  public static String calculateDate();
+    date = (count / 3) % 28 + 1;
+    return  date + “”;
+  }
 
-public static int foodLevelPlus();
+  public static String calculateMonth();
+    month = (count / 3) / 28 + 1;
+    if (month == 1) {
+      return “January”;
+    }
+    if (month == 2) {
+      return “February”;
+    }
+    else {
+      return “March”;
+    }
+  }
+
+  public static int foodLevelPlus();
     if (foodLevel < 50) {
-        foodLevel += 50;
-        return foodLevel;
+      foodLevel += 50;
+      return foodLevel;
     }
     else {
-        return 100;
-        }
+      return 100;
     }
+  }
 
-public static int intimacyPlus();
-    if (intimacy < 100) {
-        intimacy++;
-        return intimacy;
+  public static int increment(int variavle);
+    if (variable < 100) {
+      variable++;
+      return variable;
     }
     else {
-        return intimacy;
-        }
+      return variable;
     }
+  }
 
-public static int intimacyMinus();
-    if (intimacy > 0) {
-        intimacy--;
-        return intimacy;
+  public static int decrement(int variable);
+    if (variable > 0) {
+      variable--;
+      return variable;
     }
     else {
-        return intimacy;
-        }
-}
-
-public static int RebellionPlus();
-    if (rebellion < 100) {
-        intimacy++;
-        return rebellion;
+      return variable;
     }
-    else {
-        return rebellion;
-        }
-    }
-
-public static int RebellionMinus();
-    if (rebellion > 0) {
-        intimacy--;
-        return rebellion;
-    }
-    else {
-        return rebellion;
-        }
-    }
-
-public static int patCountMinus();
-    if (patCount > 0) {
-        patCount--;
-        return patCount;
-    }
-    else {
-        return patCount;
-        }
-    }
-
+  }
 }
