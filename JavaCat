@@ -1,4 +1,5 @@
 import java.util.*;
+import objectdraw.Controller.*;
 import javafx.application.Application;
 import javafx.geometry.*;
 import javafx.stage.Stage;
@@ -12,6 +13,8 @@ import javafx.scene.paint.*;
 
 public class JavaCat extends Application {
 
+  // declare and initialize static variables such as foodLevel, intimacy,
+  // intelligence, and rebellion.
   private static int foodLevel = 75;
   private static int intimacy = 25;
   private static int intelligence = 0;
@@ -26,6 +29,7 @@ public class JavaCat extends Application {
   private static int date;
   private static int month;
   
+  // declare and initialize some frequently used constants.
   private static final int TWO = 2;
   private static final int THREE = 3;
   private static final int FIVE = 5;
@@ -35,46 +39,59 @@ public class JavaCat extends Application {
   private static final int SEVENTY_FIVE = 75;
   private static final int HUNDRED = 100;
 
+  // declare and construct some elements within GUI interface
   private Image cat = new Image("image/catNormal");
+  private Text txFoodLevel = new Text(80, 400, "Food Level: " + foodLevel);
+  private Text txIntelligence =
+    new Text(80, 450, "Intelligence: " + intelligence);
+  private Text txRebellion = new Text(80, 500, "Rebellion: " + Rebellion);
   private Text txMonthAndDate = new Text(calculateMonth() + calculateDate());
   private Text txTime = new Text(calculateTime());
   private Ellipse feed;
   private Ellipse pat;
   private Ellipse rebuke;
-  private Ellipse skip;
+  private Rectangle intimacyLevel = new Rectangle(312, 900, 400, 30);
 
+  /**
+   * The start method constructs and displays the stage on canvas, which
+   * overrides the start method in Application class.
+   * The start method hasn't been finished and finalized yet.
+   * @param Stage primaryStage: The stage in which we construct the scene, and
+   *        it is displayed on canvas.
+   */ 
+  @Override
   public void start(Stage primaryStage) {
+    // create a pane to hold the texts and images.
     Pane pane = new Pane();
     pane.setPadding(new Insets(10, 10, 10, 10));
     
     ImageView background = new ImageView("image/background");
     background.setFitHeight(1024);
     background.setFitWidth(800);
-  
     ImageView imageCat = new ImageView(cat);
     
     pane.getChildren().addAll(background);
-
+    // create a scene that is 800 px wide and 1024 px high.
     Scene scene = new Scene(pane, 800, 1024);
-    primaryStage.setTitle("Java Cat");
-    primaryStage.setScene(scene);
-    primaryStage.show();
+    primaryStage.setTitle("Java Cat");		// set the stage title
+    primaryStage.setScene(scene);		// place the scene in the stage
+    primaryStage.show();			// display the stage
     primaryStage.setResizable(false);
   }
   
   public static void main(String[] args) {
     launch(args);
-    
-    if (foodLevel == 0) {
+    // If the foodLevel reaches 0 or below, the cat would die.
+    if (foodLevel <= 0) {
       System.exit(1);
     }
+    // The game would terminate three months after the cat was adopted.
     if (count == THREE * THREE * TWENTY_EIGHT - 1) {
       System.exit(1);
     }
   }
   
-  // inner class
-  public class JavaCatInteractions extends WindowController {
+  public class JavaCatInteraction extends WindowController {
     public void onMouseClick(Location point) {
       if (feed.contains(point)) {
         increment(foodLevel);
@@ -86,11 +103,6 @@ public class JavaCat extends Application {
       }
       if (rebuke.contains(point)) {
         JavaCat.rebuke();
-      }
-      if (skip.contains(point)) {
-        foodLevel -= FIVE;
-        decrement(patCount);
-        count++;
       }
     }
   }
@@ -120,7 +132,6 @@ public class JavaCat extends Application {
     }
     decrement(rebellion);
     foodLevel -= FIVE;
-    decrement(patCount);
     count++;
   }
 
@@ -184,4 +195,4 @@ public class JavaCat extends Application {
       return variable;
     }
   }
-} 
+}
