@@ -44,7 +44,7 @@ public class JavaCat extends Application {
   private Text txFoodLevel = new Text(80, 400, "Food Level: " + foodLevel);
   private Text txIntelligence =
     new Text(80, 450, "Intelligence: " + intelligence);
-  private Text txRebellion = new Text(80, 500, "Rebellion: " + rebellion);
+  private Text txRebellion = new Text(80, 500, "Rebellion: " + Rebellion);
   private Text txMonthAndDate = new Text(calculateMonth() + calculateDate());
   private Text txTime = new Text(calculateTime());
   private Ellipse feed;
@@ -106,36 +106,65 @@ public class JavaCat extends Application {
       }
     }
   }
-
+  
+  /**
+   * pat method: this method will make the intimacy increase if the patcount 
+   * less than or equal to 3, and decrease the intimacy if the patcount number 
+   * greater than 5
+   *
+   */
   public static void pat() {
+    // if the patcount number greater than 5, 
+    // each pat will decrease the intimacy one.
     if (patCount > FIVE) {
       decrement(intimacy);
     }
+    // if the patcount number less than or equal to 5 and greater than 3, 
+    // each pat will not change the intimacy
     else if (patCount > THREE) {
       patCount++;
     }
+    // if the patcount number less than or equal to 3, each pat will 
+    // make the intimacy increase one
     else {
       patCount++;
       increment(intimacy);
     }
+    //each pet will make the foodlevel decrease 5, and count increase one 
     foodLevel -= FIVE;
     count++;
   }
 
+  /** 
+   * rebuke method: this method is the will make the intimacy decrease two if 
+   * the rebellion greater than 75, and will make the intimacy ecrease one if 
+   * the rebellion less than or equal to 75
+   *
+   */
   public static void rebuke() {
+    // if the rebellion greater than 75, each rebellion will make the intimacy decrease two
     if (rebellion > SEVENTY_FIVE) {
       decrement(intimacy);
       decrement(intimacy);
     }
+    // if the rebellion less than or equal to 75, each rebellion will make the intimacy 
+    // decrease one
     else {
       decrement(intimacy);
     }
     decrement(rebellion);
+    //each rebuke will make the foodlevel decrease 5, and count increase one 
     foodLevel -= FIVE;
     count++;
   }
 
+ /**
+  * calculateTime method: this method is used to calculate the time in the game
+  *
+  */
   public static String calculateTime() {
+    // if count devided by 3 leaves 0, time is morning; if leaves 1, time is afternoon;
+    // if leaves 2, time is evening. 
     time = count % THREE;
     if (time == 0) {
       return "Morning";
@@ -147,12 +176,20 @@ public class JavaCat extends Application {
       return "Evening";
     }
   }
-
+  
+  /**
+   * calculateDate method: this method is used to calculate the date in the game 
+   *
+   */
   public static String calculateDate() {
     date = (count / THREE) % TWENTY_EIGHT + 1;
     return  date + "";
   }
-
+  
+  /**
+   * calculateMonth method: this method is used to calculate the month in the game 
+   *
+   */
   public static String calculateMonth() {
     month = (count / THREE) / TWENTY_EIGHT + 1;
     if (month == 1) {
@@ -165,17 +202,25 @@ public class JavaCat extends Application {
       return "March ";
     }
   }
-
+  /**
+   * foodLevelPlus method: this metnod is used to return the foodlevel 
+   * of the cat
+   *
+   */
   public static int foodLevelPlus() {
+    // if the foodlevel less than 50, each feed will make the foodlevel 
+    // increase 50
     if (foodLevel < FIFTY) {
       foodLevel += FIFTY;
       return foodLevel;
     }
+    //
     else {
       return HUNDRED;
     }
   }
-
+  /**
+   * 
   public static int increment(int variable) {
     if (variable < HUNDRED) {
       variable++;
@@ -185,7 +230,9 @@ public class JavaCat extends Application {
       return variable;
     }
   }
-
+  /**
+   * decrement method: if the  
+   
   public static int decrement(int variable) {
     if (variable > 0) {
       variable--;
