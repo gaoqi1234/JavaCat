@@ -44,7 +44,7 @@ public class JavaCat extends Application {
   private Text txFoodLevel = new Text(80, 400, "Food Level: " + foodLevel);
   private Text txIntelligence =
     new Text(80, 450, "Intelligence: " + intelligence);
-  private Text txRebellion = new Text(80, 500, "Rebellion: " + Rebellion);
+  private Text txRebellion = new Text(80, 500, "Rebellion: " + rebellion);
   private Text txMonthAndDate = new Text(calculateMonth() + calculateDate());
   private Text txTime = new Text(calculateTime());
   private Ellipse feed;
